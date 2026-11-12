@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>漫剧 · 竖屏刷视频</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #000; overflow: hidden; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; color: #fff; }
+  .feed {
+    height: 100dvh; overflow-y: auto; scroll-snap-type: y mandatory;
+    scrollbar-width: none; max-width: 480px; margin: 0 auto;
+    background: #000;
+  }
+  .feed::-webkit-scrollbar { display: none; }
+  .shot {
+    position: relative; height: 100dvh; scroll-snap-align: start;
+    display: flex; align-items: center; justify-content: center;
+    background: #111;
+  }
+  .shot video {
+    width: 100%; height: 100%; object-fit: contain; background: #000;
+    display: block;
+  }
+  .missing {
+    display: none; position: absolute; inset: 0;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; text-align: center; padding: 24px; background: #141414;
+  }
+  .missing .big { font-size: 20px; font-weight: 700; }
+  .missing .small { font-size: 14px; color: #aaa; line-height: 1.7; }
+  .shot.no-file video { display: none; }
+  .shot.no-file .missing { display: flex; }
+  .caption {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 56px 16px 28px;
+    background: linear-gradient(transparent, rgba(0,0,0,.82));
+    pointer-events: none;
+  }
+  .caption .tag { font-size: 12px; color: #ffb340; margin-bottom: 6px; }
+  .caption h2 { font-size: 19px; margin-bottom: 6px; }
+  .caption p { font-size: 14px; color: #ddd; line-height: 1.6; }
+  .counter {
+    position: absolute; top: calc(12px + env(safe-area-inset-top)); right: 14px;
+    font-size: 12px; color: #ccc; background: rgba(0,0,0,.5);
+    padding: 4px 9px; border-radius: 999px;
+  }
+  .sound-btn {
+    position: absolute; top: calc(12px + env(safe-area-inset-top)); left: 14px;
+    font-size: 13px; color: #fff; background: rgba(0,0,0,.5);
+    border: 1px solid rgba(255,255,255,.35); border-radius: 999px;
+    padding: 5px 11px; cursor: pointer;
+  }
+  .hint {
+    position: fixed; bottom: calc(10px + env(safe-area-inset-bottom)); left: 50%;
+    transform: translateX(-50%); font-size: 12px; color: #999;
+    background: rgba(0,0,0,.55); padding: 4px 10px; border-radius: 999px;
+    pointer-events: none; white-space: nowrap; z-index: 10;
+  }
+</style>
+</head>
+<body>
+<div class="feed" id="feed">
+  <!-- 1. 罪名不朽（Kaggle 15:17 重跑生成，约 10 秒） -->
+  <section class="shot" data-file="videos/zui-ming-bu-xiu.mp4">
+    <video src="videos/zui-ming-bu-xiu.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">《罪名不朽》还没生成</div>
+      <div class="small">昨晚 Kaggle 故障没跑出来<br>今天 15:17 重跑，生成后把<br>zui-ming-bu-xiu.mp4 放进 videos 文件夹</div></div>
+    <div class="caption"><div class="tag">番茄小说 · 罪名不朽</div>
+      <h2>黑暗考场 · 红色倒计时</h2>
+      <p>18 岁主角一个人站在课桌间，无限流死亡游戏的氛围。约 10 秒，仅供本人看，不上传。</p></div>
+    <div class="counter">1 / 11</div>
+  </section>
+
+  <!-- 2. 查理九世·吸血古堡 第一章合集（9 镜头拼成，约 45 秒） -->
+  <section class="shot" data-file="videos/chali_chapter1.mp4">
+    <video src="videos/chali_chapter1.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">《吸血古堡》第一章还没生成</div>
+      <div class="small">9 个镜头，楔子 3 个 + 镜头一 6 个<br>今天 15:17 和罪名不朽一起重跑<br>生成后把 chali_chapter1.mp4 放进 videos 文件夹</div></div>
+    <div class="caption"><div class="tag">查理九世 · 吸血古堡 · 第一章</div>
+      <h2>午夜黑袍 · 红眼睛的转学生</h2>
+      <p>楔子 3 镜头 + 镜头一 6 镜头，约 45 秒。往下刷是 9 个分镜头。</p></div>
+    <div class="counter">2 / 11</div>
+  </section>
+
+  <!-- 3-11. 查理九世 9 个分镜头（分镜表见 查理九世-吸血古堡-第一章-分镜表.md） -->
+  <section class="shot" data-file="videos/chali_p1.mp4">
+    <video src="videos/chali_p1.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">P1 · 午夜街道</div>
+      <div class="small">一声尖叫打破寂静，空无一人的街道<br>待 15:17 重跑生成 chali_p1.mp4</div></div>
+    <div class="caption"><div class="tag">楔子 · P1</div><h2>午夜街道</h2>
+      <p>午夜，一声尖叫打破寂静，空无一人的街道。</p></div>
+    <div class="counter">3 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_p2.mp4">
+    <video src="videos/chali_p2.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">P2 · 黑袍吸血鬼</div>
+      <div class="small">穿黑袍的人把尖牙插入人们的脖子<br>待 15:17 重跑生成 chali_p2.mp4</div></div>
+    <div class="caption"><div class="tag">楔子 · P2</div><h2>黑袍吸血鬼</h2>
+      <p>穿黑袍的人把尖牙插入人们的脖子，吸食鲜血。</p></div>
+    <div class="counter">4 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_p3.mp4">
+    <video src="videos/chali_p3.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">P3 · 寂静的街道</div>
+      <div class="small">黑衣人走了，只留下一具具尸体<br>待 15:17 重跑生成 chali_p3.mp4</div></div>
+    <div class="caption"><div class="tag">楔子 · P3</div><h2>寂静的街道</h2>
+      <p>黑衣人走了，只留下一具具尸体；他们是吸血鬼。</p></div>
+    <div class="counter">5 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_s1.mp4">
+    <video src="videos/chali_s1.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">S1 · 凌薇转学</div>
+      <div class="small">班里转来一位红眼睛的女同学凌薇<br>待 15:17 重跑生成 chali_s1.mp4</div></div>
+    <div class="caption"><div class="tag">镜头一 · S1</div><h2>凌薇转学</h2>
+      <p>班里转来一位红眼睛的女同学凌薇。红发红眼、暗红裙。</p></div>
+    <div class="counter">6 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_s2.mp4">
+    <video src="videos/chali_s2.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">S2 · 她怎么知道我们名字</div>
+      <div class="small">凌薇一口叫出大家的名字，多多他们觉得奇怪<br>待 15:17 重跑生成 chali_s2.mp4</div></div>
+    <div class="caption"><div class="tag">镜头一 · S2</div><h2>她怎么知道我们名字</h2>
+      <p>凌薇一口叫出大家的名字，多多他们觉得奇怪。</p></div>
+    <div class="counter">7 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_s3.mp4">
+    <video src="videos/chali_s3.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">S3 · 虎鲨被带走</div>
+      <div class="small">凌薇把虎鲨带走了，大家担心<br>待 15:17 重跑生成 chali_s3.mp4</div></div>
+    <div class="caption"><div class="tag">镜头一 · S3</div><h2>虎鲨被带走</h2>
+      <p>凌薇把虎鲨带走了，大家担心。</p></div>
+    <div class="counter">8 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_s4.mp4">
+    <video src="videos/chali_s4.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">S4 · 查理识破吸血鬼</div>
+      <div class="small">回家告诉查理，查理意识到她是吸血鬼<br>待 15:17 重跑生成 chali_s4.mp4</div></div>
+    <div class="caption"><div class="tag">镜头一 · S4</div><h2>查理识破吸血鬼</h2>
+      <p>回家告诉查理，查理意识到她是吸血鬼。查理戴红领结。</p></div>
+    <div class="counter">9 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_s5.mp4">
+    <video src="videos/chali_s5.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">S5 · 船上的监狱</div>
+      <div class="small">亚瑟船上，凌薇被关在监狱里，露出尖牙<br>待 15:17 重跑生成 chali_s5.mp4</div></div>
+    <div class="caption"><div class="tag">镜头一 · S5</div><h2>船上的监狱</h2>
+      <p>亚瑟船上，凌薇被关在监狱里，露出尖牙。</p></div>
+    <div class="counter">10 / 11</div>
+  </section>
+  <section class="shot" data-file="videos/chali_s6.mp4">
+    <video src="videos/chali_s6.mp4" loop playsinline preload="metadata"></video>
+    <div class="missing"><div class="big">S6 · 亚瑟的血与吸血古堡</div>
+      <div class="small">凌薇喝了亚瑟的血，说漏嘴提到冰灵与吸血古堡<br>待 15:17 重跑生成 chali_s6.mp4</div></div>
+    <div class="caption"><div class="tag">镜头一 · S6</div><h2>亚瑟的血与吸血古堡</h2>
+      <p>凌薇喝了亚瑟的血，说漏嘴提到冰灵与吸血古堡。</p></div>
+    <div class="counter">11 / 11</div>
+  </section>
+</div>
+<button class="sound-btn" id="soundBtn">🔇 点我开声音</button>
+<div class="hint">上滑刷下一个镜头 · 点画面暂停/播放</div>
+<script>
+  const feed = document.getElementById('feed');
+  const videos = [...document.querySelectorAll('video')];
+  let soundOn = false;
+
+  // 文件不存在时显示“还没生成”卡片（不依赖服务器，本地打开也行）
+  videos.forEach(v => {
+    v.addEventListener('error', () => v.closest('.shot').classList.add('no-file'));
+    // 有些浏览器对缺失文件不触发 error，加载后检查 readyState
+    v.addEventListener('loadedmetadata', () => v.closest('.shot').classList.remove('no-file'));
+    v.addEventListener('click', () => { v.paused ? v.play().catch(()=>{}) : v.pause(); });
+  });
+  // 兜底：2 秒后仍无元数据的当作缺失（file:// 下也适用）
+  setTimeout(() => {
+    videos.forEach(v => {
+      if (v.readyState === 0 && !v.closest('.shot').classList.contains('no-file')) {
+        v.closest('.shot').classList.add('no-file');
+      }
+    });
+  }, 2000);
+
+  // 滑到哪个播哪个，滑走就停
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const v = e.target.querySelector('video');
+      if (!v || e.target.classList.contains('no-file')) return;
+      if (e.intersectionRatio > 0.6) { v.muted = !soundOn; v.play().catch(()=>{}); }
+      else v.pause();
+    });
+  }, { root: feed, threshold: [0.6] });
+  document.querySelectorAll('.shot').forEach(s => io.observe(s));
+
+  document.getElementById('soundBtn').addEventListener('click', ev => {
+    ev.stopPropagation();
+    soundOn = !soundOn;
+    ev.target.textContent = soundOn ? '🔊 声音已开' : '🔇 点我开声音';
+    const cur = document.querySelector('.shot video:not([paused])') || videos[0];
+    if (cur) cur.muted = !soundOn;
+  });
+</script>
+</body>
+</html>
